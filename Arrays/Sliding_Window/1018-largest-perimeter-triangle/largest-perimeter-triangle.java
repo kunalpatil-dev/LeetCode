@@ -1,24 +1,17 @@
+
 class Solution {
     public int largestPerimeter(int[] nums) {
-        int n = nums.length;
-        int perimeter = 0;
-        int maxPer =0;
         Arrays.sort(nums);
-        
-         for(int i=0; i<n; i++){
-            for(int j=i+1; j<n-1; j++){
-                int k = j+1;
-                
-                if((nums[i]+nums[j])>nums[k]){
-                    perimeter = nums[i]+nums[j]+nums[k];
-                    
-                    maxPer = Math.max(perimeter, maxPer);
-                }
-             
+
+        // taverse from largest to smallest
+        for (int i = nums.length - 1; i >= 2; i--) {
+            // check triangle inequality for the top 3
+            if (nums[i - 2] + nums[i - 1] > nums[i]) {
+                // valid triangle found
+                return nums[i - 2] + nums[i - 1] + nums[i];
             }
-         }
-        
-        return maxPer;
-        
+        }
+
+        return 0;
     }
 }
